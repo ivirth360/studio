@@ -32,6 +32,25 @@ const portfolioItems = {
   ],
 };
 
+const PortfolioCard = ({ title, description, image, dataAiHint }: { title: string; description: string; image: string; dataAiHint: string; }) => (
+  <Card className="overflow-hidden group relative">
+    <Image 
+      src={image} 
+      alt={title} 
+      width={600} 
+      height={400} 
+      className="object-cover aspect-video w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105" 
+      data-ai-hint={dataAiHint} 
+    />
+    <div className="absolute inset-0 bg-black/50 bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 ease-in-out">
+      <div className="p-4 h-full flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="font-headline text-lg text-white font-bold">{title}</h3>
+        <p className="text-sm text-white/80 mt-1">{description}</p>
+      </div>
+    </div>
+  </Card>
+);
+
 export default function Portfolio() {
   return (
     <section id="portfolio" className="w-full py-16 md:py-24 bg-card">
@@ -50,78 +69,43 @@ export default function Portfolio() {
             <TabsTrigger value="research">Research</TabsTrigger>
             <TabsTrigger value="creative">Creative</TabsTrigger>
           </TabsList>
-          <TabsContent value="urban">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          
+          <TabsContent value="urban" className="mt-8 animate-in fade-in-50 duration-500">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioItems.urban.map((item) => (
-                <Card key={item.title} className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <Image src={item.image} alt={item.title} width={600} height={400} className="object-cover aspect-video" data-ai-hint={item.dataAiHint} />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  </CardContent>
-                </Card>
+                <PortfolioCard key={item.title} {...item} />
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="ai">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+
+          <TabsContent value="ai" className="mt-8 animate-in fade-in-50 duration-500">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioItems.ai.map((item) => (
-                 <Card key={item.title} className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <Image src={item.image} alt={item.title} width={600} height={400} className="object-cover aspect-video" data-ai-hint={item.dataAiHint} />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  </CardContent>
-                </Card>
+                 <PortfolioCard key={item.title} {...item} />
               ))}
             </div>
           </TabsContent>
-           <TabsContent value="symbolic">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+
+           <TabsContent value="symbolic" className="mt-8 animate-in fade-in-50 duration-500">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioItems.symbolic.map((item) => (
-                 <Card key={item.title} className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <Image src={item.image} alt={item.title} width={600} height={400} className="object-cover aspect-video" data-ai-hint={item.dataAiHint} />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  </CardContent>
-                </Card>
+                 <PortfolioCard key={item.title} {...item} />
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="research">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+
+          <TabsContent value="research" className="mt-8 animate-in fade-in-50 duration-500">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioItems.research.map((item) => (
-                 <Card key={item.title} className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <Image src={item.image} alt={item.title} width={600} height={400} className="object-cover aspect-video" data-ai-hint={item.dataAiHint} />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  </CardContent>
-                </Card>
+                 <PortfolioCard key={item.title} {...item} />
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="creative">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+
+          <TabsContent value="creative" className="mt-8 animate-in fade-in-50 duration-500">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioItems.creative.map((item) => (
-                 <Card key={item.title} className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <Image src={item.image} alt={item.title} width={600} height={400} className="object-cover aspect-video" data-ai-hint={item.dataAiHint} />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  </CardContent>
-                </Card>
+                 <PortfolioCard key={item.title} {...item} />
               ))}
             </div>
           </TabsContent>
