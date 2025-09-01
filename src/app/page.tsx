@@ -3,7 +3,6 @@ import Hero from '@/components/sections/hero';
 import About from '@/components/sections/about';
 import Services from '@/components/sections/services';
 import Portfolio from '@/components/sections/portfolio';
-import Blog from '@/components/sections/blog';
 import Frameworks from '@/components/sections/frameworks';
 import Engagement from '@/components/sections/engagement';
 import Contact from '@/components/sections/contact';
@@ -20,7 +19,6 @@ export default function Home() {
         <Portfolio />
         <Frameworks />
         <Engagement />
-        <Blog />
         <Contact />
       </main>
       <Footer />
