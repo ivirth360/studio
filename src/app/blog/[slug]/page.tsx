@@ -41,7 +41,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     <div className="flex flex-col min-h-dvh bg-background text-foreground">
       <Header />
       <main className="flex-1 py-12 md:py-20">
-        <article className="container mx-auto px-4 md:px-6 max-w-4xl">
+        <article className="container mx-auto px-4 md:px-6 max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000">
           <header className="mb-8">
             <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-primary mb-4">
               {post.title}
