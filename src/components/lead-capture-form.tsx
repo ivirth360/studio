@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { submitLead } from '@/app/actions';
-import { Loader2, Sparkles, Wand2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 const formSchema = z.object({
@@ -31,7 +31,6 @@ const formSchema = z.object({
 export default function LeadCaptureForm() {
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const [suggestedReply, setSuggestedReply] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,7 +43,6 @@ export default function LeadCaptureForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setSuggestedReply(null);
     startTransition(async () => {
       const result = await submitLead(values);
       if (result.success) {
@@ -52,7 +50,6 @@ export default function LeadCaptureForm() {
           title: 'Message Sent!',
           description: "Thanks for reaching out. We'll be in touch soon.",
         });
-        setSuggestedReply(result.suggestedReply);
         form.reset();
       } else {
         toast({
@@ -128,35 +125,6 @@ export default function LeadCaptureForm() {
           </Button>
         </form>
       </Form>
-      {(isPending || suggestedReply) && (
-        <Card className="bg-muted/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 font-headline">
-              <Wand2 className="text-primary"/>
-              AI Suggested Reply
-            </CardTitle>
-            <CardDescription>
-              Based on the lead's message, here is a suggested response.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm">
-            {isPending ? (
-              <div className="space-y-2">
-                <p className="flex items-center text-muted-foreground">
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Analyzing message and generating response...
-                </p>
-              </div>
-            ) : (
-              <Textarea
-                readOnly
-                value={suggestedReply || ''}
-                className="min-h-[200px] bg-background"
-              />
-            )}
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

@@ -1,13 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { processLead } from '@/ai/flows/process-lead-flow';
 import nodemailer from 'nodemailer';
-import { estimateProject } from '@/ai/flows/project-estimator-flow';
-import { conversationalEstimate } from '@/ai/flows/conversational-estimator-flow';
-import { generateSigil } from '@/ai/flows/sigil-generator-flow';
-import { generateMerchMockup } from '@/ai/flows/merch-mockup-flow';
-
 
 const leadSchema = z.object({
   name: z.string().min(2),
@@ -16,7 +10,7 @@ const leadSchema = z.object({
   message: z.string().min(10),
 });
 
-async function sendEmail({ lead, suggestedReply }: { lead: z.infer<typeof leadSchema>, suggestedReply: string | null }) {
+async function sendEmail({ lead }: { lead: z.infer<typeof leadSchema> }) {
   const { name, email, company, message } = lead;
 
   const transporter = nodemailer.createTransport({
@@ -44,9 +38,6 @@ async function sendEmail({ lead, suggestedReply }: { lead: z.infer<typeof leadSc
       ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
       <p><strong>Message:</strong></p>
       <p>${message}</p>
-      <hr />
-      <h2>AI Suggested Reply:</h2>
-      <p>${suggestedReply || 'Not available.'}</p>
     `,
   };
 
@@ -81,27 +72,17 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
   const parsed = leadSchema.safeParse(values);
 
   if (!parsed.success) {
-    return { success: false, message: 'Invalid data', suggestedReply: null };
-  }
-
-  let aiResponse;
-  try {
-    aiResponse = await processLead(parsed.data);
-  } catch (error) {
-    console.error('AI processing failed:', error);
-    aiResponse = { suggestedReply: 'Could not generate a suggestion at this time.' };
+    return { success: false, message: 'Invalid data' };
   }
 
   const emailResult = await sendEmail({
     lead: parsed.data,
-    suggestedReply: aiResponse.suggestedReply,
   });
 
   if (!emailResult.success) {
      return { 
       success: false, 
       message: 'Lead submission failed at email stage.',
-      suggestedReply: aiResponse.suggestedReply 
     };
   }
   
@@ -111,91 +92,5 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
   return { 
     success: true, 
     message: 'Lead submitted successfully',
-    suggestedReply: aiResponse.suggestedReply 
   };
-}
-
-const estimatorSchema = z.object({
-  description: z.string().min(20, { message: "Please provide a more detailed description (at least 20 characters)." }),
-});
-
-export async function getProjectEstimate(values: z.infer<typeof estimatorSchema>) {
-  const parsed = estimatorSchema.safeParse(values);
-
-  if (!parsed.success) {
-    const error = parsed.error.format().description?._errors[0];
-    return { success: false, message: error || 'Invalid data', estimation: null };
-  }
-
-  try {
-    const estimation = await estimateProject(parsed.data);
-    return { success: true, message: 'Estimation complete', estimation };
-  } catch (error) {
-    console.error('AI estimation failed:', error);
-    return { success: false, message: 'Could not generate an estimate at this time.', estimation: null };
-  }
-}
-
-const chatSchema = z.object({
-  messages: z.array(z.object({
-    role: z.enum(['user', 'model']),
-    content: z.string(),
-  })),
-});
-
-export async function submitChatMessage(values: z.infer<typeof chatSchema>) {
-  const parsed = chatSchema.safeParse(values);
-  if (!parsed.success) {
-    return { success: false, message: 'Invalid data', response: null };
-  }
-  try {
-    const response = await conversationalEstimate(parsed.data);
-    return { success: true, message: 'Response generated', response };
-  } catch (error) {
-    console.error('AI chat failed:', error);
-    return { success: false, message: 'Could not generate a response at this time.', response: null };
-  }
-}
-
-const sigilSchema = z.object({
-    name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-    zodiacSign: z.string(),
-    intention: z.string().optional(),
-});
-
-export async function getSigil(values: z.infer<typeof sigilSchema>) {
-    const parsed = sigilSchema.safeParse(values);
-    if (!parsed.success) {
-        const error = parsed.error.format()._errors[0];
-        return { success: false, message: error || 'Invalid data', sigil: null };
-    }
-
-    try {
-        const sigil = await generateSigil(parsed.data);
-        return { success: true, message: 'Sigil generated!', sigil };
-    } catch (error) {
-        console.error('AI sigil generation failed:', error);
-        return { success: false, message: 'Could not generate a sigil at this time.', sigil: null };
-    }
-}
-
-const merchMockupSchema = z.object({
-    sigilImageDataUri: z.string(),
-    productName: z.string(),
-});
-
-export async function getMerchMockup(values: z.infer<typeof merchMockupSchema>) {
-    const parsed = merchMockupSchema.safeParse(values);
-    if (!parsed.success) {
-        const error = parsed.error.format()._errors[0];
-        return { success: false, message: error || 'Invalid data', mockup: null };
-    }
-
-    try {
-        const mockup = await generateMerchMockup(parsed.data);
-        return { success: true, message: 'Mockup generated!', mockup };
-    } catch (error) {
-        console.error('AI mockup generation failed:', error);
-        return { success: false, message: 'Could not generate a mockup at this time.', mockup: null };
-    }
 }
