@@ -5,6 +5,7 @@ import Footer from '@/components/footer';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
