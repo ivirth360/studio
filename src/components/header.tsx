@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Leaf, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { NavLinks } from './nav-links';
 
 const Header = () => {
@@ -45,13 +45,15 @@ const Header = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left">
+            <SheetHeader>
+                <SheetTitle className="font-headline text-2xl">
+                     <Link href="/" className="flex items-center gap-2" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
+                        <Leaf className="h-6 w-6 text-primary" />
+                        <span>SYMBI0N</span>
+                     </Link>
+                </SheetTitle>
+            </SheetHeader>
             <div className="flex flex-col gap-6 p-6">
-               <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
-                  <Leaf className="h-6 w-6 text-primary" />
-                  <span className="font-headline text-xl font-bold tracking-tighter">
-                    SYMBI0N
-                  </span>
-                </Link>
               <nav className="flex flex-col gap-4 text-lg font-medium">
                  <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
               </nav>
