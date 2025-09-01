@@ -1,36 +1,61 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Leaf, BrainCircuit, Building, Scaling, Users, Lightbulb } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Leaf, BrainCircuit, Building, Lightbulb, Code, BookText, Check } from 'lucide-react';
 
-const services = [
+const serviceCategories = [
   {
+    title: 'AI & Digital Systems',
     icon: <BrainCircuit className="h-8 w-8 text-primary" />,
-    title: 'Regenerative AI',
-    description: 'Developing AI that learns from and contributes to natural ecosystems, promoting biodiversity and resource optimization.',
+    items: [
+      'AI Assistants (custom GPTs, trained on your domain)',
+      'AI Flow Architecture (automations, triggers, workflows)',
+      'Conversational AI (for education, real estate, health, governance)',
+      'Symbolic AI (codexes, glyphs, seals)',
+      'IoT + AI integration (eco devices, wearables, apps)',
+    ],
   },
   {
+    title: 'Urbanism & Planning Futures',
     icon: <Building className="h-8 w-8 text-primary" />,
-    title: 'Urban Symbiosis',
-    description: 'Designing smart cities where infrastructure, technology, and nature coexist in a mutually beneficial relationship.',
+    items: [
+      'Urban & Regional Planning',
+      'Smart City Ecosystems (IoT, AI, e-mobility, eco-benches)',
+      'Biomimetic & Symbolic Urban Design',
+      'Research & Policy Frameworks',
+      'Sustainable Land-use & Habitat Planning',
+    ],
   },
   {
-    icon: <Leaf className="h-8 w-8 text-primary" />,
-    title: 'Bio-integrated Systems',
-    description: 'Engineering solutions that merge biological processes with digital technology for sustainable living.',
-  },
-  {
-    icon: <Scaling className="h-8 w-8 text-primary" />,
-    title: 'Decentralized Networks',
-    description: 'Building resilient, community-owned networks for data, energy, and resource management.',
-  },
-  {
-    icon: <Users className="h-8 w-8 text-primary" />,
-    title: 'Human-AI Collaboration',
-    description: 'Creating frameworks for intuitive and ethical collaboration between humans and intelligent systems.',
-  },
-  {
+    title: 'Creative Strategy & Storytelling',
     icon: <Lightbulb className="h-8 w-8 text-primary" />,
-    title: 'Futures Strategy',
-    description: 'Providing strategic foresight and scenario planning for organizations navigating complex systemic change.',
+    items: [
+      'Narrative Architecture (mythic + systemic storytelling)',
+      'Brand Identity (glyphs, seals, symbolic design language)',
+      'Vision Decks & Portfolios',
+      'Interactive Codexes (web/VR/AR apps)',
+      'Script & Film Development',
+    ],
+  },
+  {
+    title: 'Design & Development',
+    icon: <Code className="h-8 w-8 text-primary" />,
+    items: [
+      'Web & App Development (full-stack)',
+      'AI-powered Webapps',
+      'UI/UX with symbolic language',
+      'Landing Pages & Funnels',
+      'Motion Graphics & Sonic/Lumia visuals',
+    ],
+  },
+  {
+    title: 'Research & Consulting',
+    icon: <BookText className="h-8 w-8 text-primary" />,
+    items: [
+      'Research Papers & Journal Submissions',
+      'Knowledge Platforms (digital campuses, ecosystems)',
+      'Sustainability & Climate Consulting',
+      'Innovation Strategy for Startups & Institutions',
+      'Academic & Grant Writing',
+    ],
   },
 ];
 
@@ -44,18 +69,29 @@ export default function Services() {
             We provide end-to-end support for projects aiming to create deep, systemic impact at the nexus of technology and ecology.
           </p>
         </div>
-        <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:max-w-none lg:grid-cols-3 mt-12">
-          {services.map((service) => (
-            <Card key={service.title} className="hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <CardHeader className="flex flex-row items-center gap-4">
-                {service.icon}
-                <CardTitle className="font-headline">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{service.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="mx-auto max-w-4xl mt-12">
+          <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
+            {serviceCategories.map((category, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                <AccordionTrigger className="text-xl font-headline hover:no-underline">
+                  <div className="flex items-center gap-4">
+                    {category.icon}
+                    {category.title}
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4 pl-12">
+                  <ul className="space-y-3">
+                    {category.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                        <span className="text-muted-foreground">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>
