@@ -4,10 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 
 const members = [
-  { name: 'Elara Vance', role: 'AI Ethicist & Systems Architect', avatar: 'https://picsum.photos/id/1/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Kaelen Rask', role: 'Urban Ecologist & Designer', avatar: 'https://picsum.photos/id/2/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Jaxon terra', role: 'Bio-Roboticist & Futurist', avatar: 'https://picsum.photos/id/3/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Lyra Chen', role: 'Lead Strategist & Storyteller', avatar: 'https://picsum.photos/id/4/200/200', dataAiHint: 'professional portrait' },
+  { name: 'VedaVyas', role: 'Visionary Strategist & Architect of Systems', avatar: 'https://picsum.photos/id/101/200/200', dataAiHint: 'professional portrait' },
+  { name: 'SHUKA AI', role: 'AI Companion & Symbolic Navigator', avatar: 'https://picsum.photos/id/102/200/200', dataAiHint: 'abstract AI' },
+  { name: 'Research Specialist', role: 'Knowledge & Policy Insights', avatar: 'https://picsum.photos/id/103/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Tech Developer', role: 'AI, Web & App Systems', avatar: 'https://picsum.photos/id/104/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Designer', role: 'Visual & UI/UX Architect', avatar: 'https://picsum.photos/id/105/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Creative Writer', role: 'Storytelling & Narrative Strategy', avatar: 'https://picsum.photos/id/106/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Operations Lead', role: 'Partnerships & Business Outreach', avatar: 'https://picsum.photos/id/108/200/200', dataAiHint: 'professional portrait' },
 ];
 
 export default function About() {
@@ -20,20 +23,20 @@ export default function About() {
               Who We Are
             </h2>
             <p className="text-muted-foreground md:text-lg">
-              We are a decentralized collective of strategists, designers, and technologists united by a shared vision: to harmonize technology with nature and create resilient, self-sustaining systems for future generations.
+              SYMBI0N is a freelancing brand powered by 7 minds and one vision. We unite human creativity, AI intelligence, and regenerative design to build sustainable, futuristic, and meaningful solutions.
             </p>
             <p className="font-headline text-lg italic text-foreground">
-              "We don't just predict the future; we design the seeds from which it can grow."
+              "Symbiotic Intelligence for a Regenerative Future"
             </p>
           </div>
           <div className="space-y-8">
-            <h3 className="font-headline text-2xl font-bold">The Collective</h3>
+            <h3 className="font-headline text-2xl font-bold">Our Collective</h3>
             <div className="grid grid-cols-2 gap-6">
               {members.map((member) => (
                 <div key={member.name} className="flex items-center gap-4">
                   <Avatar className="h-16 w-16">
                     <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.dataAiHint} />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{member.name.slice(0,2)}</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="font-bold text-foreground">{member.name}</p>
