@@ -17,8 +17,8 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
     return { success: false, message: 'Invalid data', suggestedReply: null };
   }
 
-  // In a real application, you would save this to a database.
-  console.log('New Lead Received:');
+  // In a real application, you would save this to a database and send an email.
+  console.log('New Lead Received for symbi0n@shuka.in:');
   console.log(parsed.data);
 
   // AI-powered lead processing
