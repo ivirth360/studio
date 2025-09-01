@@ -1,21 +1,31 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Layers, GitBranch, HeartHandshake } from 'lucide-react';
+import { BookOpen, Sparkles, Sprout, Bot, Wallet } from 'lucide-react';
 
 const frameworks = [
   {
-    icon: <GitBranch className="h-8 w-8 text-accent" />,
-    title: 'Symbiotic Design',
-    description: 'A design philosophy that prioritizes mutualism, ensuring every component in a system benefits and supports others.',
+    icon: <BookOpen className="h-8 w-8 text-accent" />,
+    title: 'PUBLIKA AI',
+    description: 'Digital Campus & Knowledge Ecosystem',
   },
   {
-    icon: <Layers className="h-8 w-8 text-accent" />,
-    title: 'Multi-scalar Systems Thinking',
-    description: 'Analyzing and intervening in systems at multiple scales simultaneously, from the microscopic to the planetary.',
+    icon: <Sparkles className="h-8 w-8 text-accent" />,
+    title: 'VEDASHAKTIKA',
+    description: 'A symbolic-futuristic storytelling universe',
   },
   {
-    icon: <HeartHandshake className="h-8 w-8 text-accent" />,
-    title: 'Ecosystemic Value Flow',
-    description: 'Redefining value to include ecological health, social equity, and long-term resilience, not just financial profit.',
+    icon: <Sprout className="h-8 w-8 text-accent" />,
+    title: 'GOBERdhan Planning Theory',
+    description: 'Sustainable urban framework',
+  },
+  {
+    icon: <Bot className="h-8 w-8 text-accent" />,
+    title: 'SHUKA AI',
+    description: 'Your symbolic & systemic AI companion',
+  },
+  {
+    icon: <Wallet className="h-8 w-8 text-accent" />,
+    title: 'Svarna Eco-Wallet',
+    description: 'Unified eco-digital lifestyle pass',
   },
 ];
 
@@ -29,12 +39,12 @@ export default function Frameworks() {
             Our work is guided by a set of core principles that help us navigate complexity and design for regeneration.
           </p>
         </div>
-        <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
+        <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-10">
           {frameworks.map((framework) => (
-            <div key={framework.title} className="flex flex-col justify-start space-y-4">
+            <div key={framework.title} className="flex flex-col items-center justify-start space-y-4 text-center">
               <div className="flex justify-center">{framework.icon}</div>
-              <h3 className="text-xl font-bold font-headline text-center">{framework.title}</h3>
-              <p className="text-muted-foreground text-center">{framework.description}</p>
+              <h3 className="text-xl font-bold font-headline">{framework.title}</h3>
+              <p className="text-muted-foreground">{framework.description}</p>
             </div>
           ))}
         </div>
