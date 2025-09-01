@@ -3,63 +3,63 @@ import { Leaf, BrainCircuit, Building, Lightbulb, Code, BookText, Check } from '
 
 const serviceCategories = [
   {
-    title: 'AI & Digital Systems',
+    title: 'Global AI & Digital Systems',
     icon: <BrainCircuit className="h-10 w-10 text-primary" />,
     items: [
-      'AI Assistants & Workflows',
-      'Conversational AI Agents',
-      'Symbolic AI & Codexes',
-      'IoT & AI Integration',
+      'AI Strategy for Global Enterprises',
+      'International Conversational AI Agents',
+      'Symbolic AI & Global Codexes',
+      'IoT & AI Integration for Smart Cities',
     ],
   },
   {
-    title: 'Urbanism & Planning',
+    title: 'International Urbanism & Planning',
     icon: <Building className="h-10 w-10 text-primary" />,
     items: [
       'Smart & Symbiotic City Design',
-      'Biomimetic Architecture',
-      'Regenerative Policy Frameworks',
+      'Biomimetic Architecture Solutions',
+      'Global Regenerative Policy Frameworks',
       'Sustainable Land-use Planning',
     ],
   },
   {
-    title: 'Creative Strategy',
+    title: 'Creative Strategy for Global Brands',
     icon: <Lightbulb className="h-10 w-10 text-primary" />,
     items: [
-      'Narrative Architecture',
-      'Systemic Brand Identity',
-      'Vision Decks & Portfolios',
-      'Interactive Storytelling',
+      'Global Narrative Architecture',
+      'Systemic International Brand Identity',
+      'Vision Decks & Global Portfolios',
+      'Interactive Storytelling for a Global Audience',
     ],
   },
   {
-    title: 'Design & Development',
+    title: 'Worldwide Design & Development',
     icon: <Code className="h-10 w-10 text-primary" />,
     items: [
-      'Full-Stack Web & App Dev',
-      'AI-powered Web Applications',
-      'Symbolic UI/UX Design',
-      'Motion Graphics & Visuals',
+      'Full-Stack Web & App Development',
+      'AI-powered Web Applications for Global Scale',
+      'Symbolic UI/UX Design for International Users',
+      'Motion Graphics & Global Visuals',
     ],
   },
   {
-    title: 'Research & Consulting',
+    title: 'International Research & Consulting',
     icon: <BookText className="h-10 w-10 text-primary" />,
     items: [
-      'Academic Research & Papers',
-      'Digital Knowledge Ecosystems',
-      'Climate & Innovation Strategy',
-      'Grant & Academic Writing',
+      'International Academic Research & Papers',
+      'Global Digital Knowledge Ecosystems',
+      'Climate & Innovation Strategy Consulting',
+      'Grant & Academic Writing for Global Institutions',
     ],
   },
   {
-    title: 'Symbiotic Intelligence',
+    title: 'Global Symbiotic Intelligence',
     icon: <Leaf className="h-10 w-10 text-primary" />,
     items: [
-      'Life-Centered Design Sprints',
-      'Ecological Data Analysis',
-      'Human-AI-Nature Interfaces',
-      'Regenerative Systems Mapping',
+      'Life-Centered Design Sprints for Global Products',
+      'Worldwide Ecological Data Analysis',
+      'Human-AI-Nature Interfaces for Global Systems',
+      'Regenerative Systems Mapping for Planet-Scale Impact',
     ],
   },
 ];
@@ -69,9 +69,9 @@ export default function Services() {
     <section id="services" className="w-full py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">Our Services</h2>
+          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">Our Global Services</h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            We provide end-to-end support for projects aiming to create deep, systemic impact at the nexus of technology and ecology.
+            We provide end-to-end support for projects aiming to create deep, systemic impact. Our services are designed for global clients at the nexus of technology, ecology, and urbanism.
           </p>
         </div>
         <div className="mx-auto grid max-w-7xl items-stretch gap-8 sm:grid-cols-2 lg:max-w-none lg:grid-cols-3 mt-12">

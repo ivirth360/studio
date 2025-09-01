@@ -10,10 +10,10 @@ export default function Contact() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-              Let’s Co-Create the Future.
+              Let’s Co-Create the Future, Globally.
             </h2>
             <p className="text-muted-foreground md:text-lg">
-              Have a project in mind? An idea to explore? Or just want to connect with the collective? We'd love to hear from you. Fill out the form, and our AI assistant will help draft a starting point for our conversation.
+              Have a project in mind? An idea to explore? Or just want to connect with our global collective? We partner with innovators and organizations worldwide. Fill out the form, and our AI assistant will help draft a starting point for our conversation.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -31,7 +31,7 @@ export default function Contact() {
             </div>
              <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="outline">
-                    <Link href="#portfolio">Request Portfolio</Link>
+                    <Link href="#portfolio">Request Full Portfolio</Link>
                 </Button>
             </div>
           </div>

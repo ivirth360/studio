@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'SYMBI0N',
-  description: 'A collective of strategists, designers, and technologists exploring the intersection of AI, urbanism, and regenerative systems.',
+  title: 'SYMBI0N | AI, Regenerative Design & Urban Futures Collective',
+  description: 'SYMBI0N is a global collective of strategists, designers, and technologists specializing in AI-driven solutions, regenerative systems, and urban planning for a sustainable future. We partner with clients worldwide.',
 };
 
 export default function RootLayout({
