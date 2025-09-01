@@ -87,9 +87,6 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
     };
   }
   
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
   return { 
     success: true, 
     message: 'Lead submitted successfully',
