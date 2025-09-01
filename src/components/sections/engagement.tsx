@@ -3,19 +3,24 @@ import { Check } from 'lucide-react';
 
 const models = [
   {
-    title: 'Project-based Sprint',
-    description: 'For well-defined challenges that need a concentrated burst of creative and technical energy.',
-    features: ['2-6 Week Sprints', 'Dedicated Team', 'Clear Deliverables'],
+    title: 'Freelance Projects',
+    description: 'One-time or milestone-based engagements for specific project needs.',
+    features: ['Fixed Scope', 'Milestone-based Delivery', 'Targeted Expertise'],
   },
   {
-    title: 'Strategic Retainer',
-    description: 'For ongoing guidance, research, and design leadership as you navigate long-term transformation.',
-    features: ['Monthly Engagement', 'Embedded Expertise', 'Adaptive Strategy'],
+    title: 'Monthly Retainers',
+    description: 'Ongoing AI, research, and strategy support to embed our expertise within your team.',
+    features: ['Continuous Support', 'Strategic Partnership', 'AI + Research + Strategy'],
   },
   {
-    title: 'Venture Partnership',
-    description: 'For ambitious new ventures where we co-invest our time and resources in exchange for equity.',
-    features: ['Shared Risk/Reward', 'Deep Collaboration', 'Long-term Growth'],
+    title: 'Collaborative Labs',
+    description: 'Co-creation partnerships with startups and institutions to build and launch new ventures.',
+    features: ['Joint Development', 'Shared Goals', 'Accelerated Innovation'],
+  },
+  {
+    title: 'Knowledge-as-a-Service',
+    description: 'Access our expertise on demand for research papers, training, and policy notes.',
+    features: ['Expert Insights', 'Custom Research', 'Flexible Access'],
   },
 ];
 
@@ -29,7 +34,7 @@ export default function Engagement() {
             We adapt our collaboration style to fit your unique needs. We engage as fluidly and dynamically as the systems we design.
           </p>
         </div>
-        <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 md:gap-12 lg:max-w-none lg:grid-cols-3 mt-12">
+        <div className="mx-auto grid max-w-7xl items-stretch gap-8 sm:grid-cols-2 lg:max-w-none lg:grid-cols-4 mt-12">
           {models.map((model) => (
             <Card key={model.title} className="flex flex-col">
               <CardHeader>
