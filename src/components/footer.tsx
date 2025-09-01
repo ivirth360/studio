@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Leaf } from "lucide-react";
-import AiContentTool from "./ai-content-tool";
 
 export default function Footer() {
   return (
@@ -13,9 +12,6 @@ export default function Footer() {
         </div>
         <div className="text-sm text-muted-foreground">
           © 2025 SYMBI0N Collective | Powered by SHUKA AI
-        </div>
-        <div className="flex items-center gap-4">
-            <AiContentTool />
         </div>
       </div>
     </footer>
