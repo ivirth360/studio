@@ -1,29 +1,30 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Sparkles, Sprout, Bot, Wallet } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const frameworks = [
   {
-    icon: <BookOpen className="h-8 w-8 text-accent" />,
+    icon: <BookOpen className="h-8 w-8 text-primary" />,
     title: 'PUBLIKA AI',
     description: 'Digital Campus & Knowledge Ecosystem',
   },
   {
-    icon: <Sparkles className="h-8 w-8 text-accent" />,
+    icon: <Sparkles className="h-8 w-8 text-primary" />,
     title: 'VEDASHAKTIKA',
     description: 'A symbolic-futuristic storytelling universe',
   },
   {
-    icon: <Sprout className="h-8 w-8 text-accent" />,
+    icon: <Sprout className="h-8 w-8 text-primary" />,
     title: 'GOBERdhan Planning Theory',
     description: 'Sustainable urban framework',
   },
   {
-    icon: <Bot className="h-8 w-8 text-accent" />,
+    icon: <Bot className="h-8 w-8 text-primary" />,
     title: 'SHUKA AI',
     description: 'Your symbolic & systemic AI companion',
   },
   {
-    icon: <Wallet className="h-8 w-8 text-accent" />,
+    icon: <Wallet className="h-8 w-8 text-primary" />,
     title: 'Svarna Eco-Wallet',
     description: 'Unified eco-digital lifestyle pass',
   },
@@ -34,7 +35,7 @@ export default function Frameworks() {
     <section id="frameworks" className="w-full py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">Signature Frameworks</h2>
+          <h2 className={cn("font-headline text-3xl font-bold tracking-tighter sm:text-4xl", "text-gradient bg-gradient-gold")}>Signature Frameworks</h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Our work is guided by a set of core principles that help us navigate complexity and design for regeneration.
           </p>

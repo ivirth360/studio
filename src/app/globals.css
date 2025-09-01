@@ -68,3 +68,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+  }
+  .bg-gradient-gold {
+    background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--chart-1)));
+  }
+  .bg-gradient-full {
+     background-image: linear-gradient(to right, hsl(var(--chart-4)), hsl(var(--chart-1)), hsl(var(--chart-2)), hsl(var(--chart-3)));
+  }
+}

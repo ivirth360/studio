@@ -2,22 +2,26 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 export default function Hero() {
   return (
     <section className="relative w-full py-24 md:py-32 lg:py-48 flex items-center justify-center">
        <Image
-        src="https://picsum.photos/seed/gold-abstract/1920/1080"
-        alt="Abstract gold and black background representing global networks"
+        src="https://picsum.photos/seed/future-tech/1920/1080"
+        alt="Abstract background representing global networks and future technology"
         fill
         className="object-cover -z-10"
-        data-ai-hint="abstract gold black"
+        data-ai-hint="abstract technology"
         priority
       />
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm -z-10" />
       <div className="container mx-auto px-4 md:px-6 text-center z-10">
-        <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-12 duration-1000">
-          <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-primary">
+        <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-12 duration-1000">
+          <h1 className={cn(
+            "font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl",
+            "text-gradient bg-gradient-full"
+            )}>
             Co-Creating Regenerative Futures
           </h1>
           <p className="mt-6 text-lg md:text-xl text-foreground/80">

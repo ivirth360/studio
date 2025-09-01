@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, BrainCircuit, Building, Lightbulb, Code, BookText, Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const serviceCategories = [
   {
@@ -69,7 +70,7 @@ export default function Services() {
     <section id="services" className="w-full py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">Our Global Services</h2>
+          <h2 className={cn("font-headline text-3xl font-bold tracking-tighter sm:text-4xl", "text-gradient bg-gradient-gold")}>Our Global Services</h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             We provide end-to-end support for projects aiming to create deep, systemic impact. Our services are designed for global clients at the nexus of technology, ecology, and urbanism.
           </p>
@@ -87,7 +88,7 @@ export default function Services() {
                 <ul className="space-y-3">
                   {category.items.map((item, itemIndex) => (
                     <li key={itemIndex} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                      <Check className="h-5 w-5 mt-1 text-primary flex-shrink-0" />
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}

@@ -2,6 +2,7 @@ import LeadCaptureForm from '@/components/lead-capture-form';
 import { Mail, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export default function Contact() {
   return (
@@ -9,7 +10,7 @@ export default function Contact() {
       <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
-            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+            <h2 className={cn("font-headline text-3xl font-bold tracking-tighter sm:text-4xl", "text-gradient bg-gradient-gold")}>
               Let’s Co-Create the Future, Globally.
             </h2>
             <p className="text-muted-foreground md:text-lg">

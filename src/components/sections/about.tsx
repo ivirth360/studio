@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
 const members = [
   { name: 'AI Companion', role: 'Your Symbolic & Systemic Navigator', avatar: 'https://picsum.photos/seed/shuka-ai-avatar/200/200', dataAiHint: 'abstract AI' },
@@ -19,7 +20,7 @@ export default function About() {
       <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <div className="space-y-4">
-            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+            <h2 className={cn("font-headline text-3xl font-bold tracking-tighter sm:text-4xl", "text-gradient bg-gradient-gold")}>
               AI-Led Collective for a Regenerative Future
             </h2>
             <p className="text-muted-foreground md:text-lg">

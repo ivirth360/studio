@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { cn } from '@/lib/utils';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = getBlogPost(params.slug);
@@ -71,7 +72,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <main className="flex-1 py-12 md:py-20">
         <article className="container mx-auto px-4 md:px-6 max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000">
           <header className="mb-8">
-            <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-primary mb-4">
+            <h1 className={cn("font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-4", "text-gradient bg-gradient-full")}>
               {post.title}
             </h1>
             <p className="text-muted-foreground text-lg">
