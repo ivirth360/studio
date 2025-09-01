@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { NavLinks } from './nav-links';
 import { ThemeToggle } from './theme-toggle';
 
-const Header = () => {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -25,7 +25,7 @@ const Header = () => {
     <header
       className={cn(
         'sticky top-0 z-50 w-full transition-all duration-300',
-        isScrolled ? 'bg-background/80 backdrop-blur-sm border-b' : 'bg-transparent'
+        isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur-lg' : 'bg-transparent'
       )}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
@@ -49,17 +49,17 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="left">
                 <SheetHeader>
-                    <SheetTitle className="font-headline text-2xl">
-                        <Link href="/" className="flex items-center gap-2" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
+                    <SheetTitle>
+                        <Link href="/" className="flex items-center gap-2 font-headline text-2xl" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
                             <Leaf className="h-6 w-6 text-primary" />
                             <span>SYMBI0N</span>
                         </Link>
                     </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-6 p-6">
-                <nav className="flex flex-col gap-4 text-lg font-medium">
-                    <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
-                </nav>
+                <div className="mt-8">
+                  <nav className="flex flex-col gap-6 text-lg font-medium">
+                      <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
+                  </nav>
                 </div>
             </SheetContent>
             </Sheet>
@@ -67,6 +67,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}
