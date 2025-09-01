@@ -76,9 +76,6 @@ Generate the name and description based on the schema.
       ai.generate({
         model: 'googleai/imagen-4.0-fast-generate-001',
         prompt: imagePrompt,
-        output: {
-          format: 'png',
-        },
       }),
       ai.generate({
         model: 'googleai/gemini-2.5-flash',
