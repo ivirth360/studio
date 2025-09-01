@@ -159,6 +159,7 @@ export async function submitChatMessage(values: z.infer<typeof chatSchema>) {
 const sigilSchema = z.object({
     name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
     zodiacSign: z.string(),
+    intention: z.string().optional(),
 });
 
 export async function getSigil(values: z.infer<typeof sigilSchema>) {

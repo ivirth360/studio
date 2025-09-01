@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
-import { Wand2, Loader2, Sparkles, ShoppingCart } from 'lucide-react';
+import { Wand2, Loader2, Sparkles, ShoppingCart, Target } from 'lucide-react';
 
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,6 +33,7 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { getSigil } from '@/app/actions';
 import type { GenerateSigilOutput } from '@/ai/flows/sigil-generator-flow';
+import { Textarea } from '@/components/ui/textarea';
 
 const zodiacSigns = [
   "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
@@ -51,6 +53,7 @@ const products = [
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   zodiacSign: z.string({ required_error: "Please select a zodiac sign." }),
+  intention: z.string().max(100, { message: "Your intention should be 100 characters or less."}).optional(),
 });
 
 export default function MerchPage() {
@@ -63,6 +66,7 @@ export default function MerchPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      intention: '',
     },
   });
 
@@ -97,7 +101,7 @@ export default function MerchPage() {
                 Personalized Symbiotic Merch
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Create your own unique sigil with SHUKA AI, based on your name and zodiac sign. A symbol of your personal power, printed on our sustainable products.
+                Create your own unique sigil with SHUKA AI. A symbol of your personal power, printed on our sustainable products.
               </p>
             </div>
             
@@ -111,43 +115,62 @@ export default function MerchPage() {
                       Craft Your Sigil
                     </CardTitle>
                     <CardDescription>
-                      Enter your details below and let SHUKA AI generate a symbol unique to your cosmic signature.
+                      Enter your details and a personal intention. SHUKA AI will generate a symbol unique to your cosmic signature.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Your Name</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Enter your full name" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="zodiacSign"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Zodiac Sign</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Your Name</FormLabel>
                                 <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select your zodiac sign" />
-                                  </SelectTrigger>
+                                  <Input placeholder="Enter your full name" {...field} />
                                 </FormControl>
-                                <SelectContent>
-                                  {zodiacSigns.map(sign => (
-                                    <SelectItem key={sign} value={sign}>{sign}</SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <FormField
+                            control={form.control}
+                            name="zodiacSign"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Zodiac Sign</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                  <FormControl>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Select your zodiac sign" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {zodiacSigns.map(sign => (
+                                      <SelectItem key={sign} value={sign}>{sign}</SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                        <FormField
+                          control={form.control}
+                          name="intention"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="flex items-center gap-2">
+                                <Target className="h-4 w-4"/>
+                                Your Intention (Optional)
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea placeholder="e.g., 'Embrace creativity' or 'Find balance'" {...field} />
+                              </FormControl>
+                              <FormDescription>A word or short phrase that the AI will weave into your sigil's design.</FormDescription>
                               <FormMessage />
                             </FormItem>
                           )}
