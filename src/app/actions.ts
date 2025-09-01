@@ -5,6 +5,7 @@ import { processLead } from '@/ai/flows/process-lead-flow';
 import nodemailer from 'nodemailer';
 import { estimateProject } from '@/ai/flows/project-estimator-flow';
 import { conversationalEstimate } from '@/ai/flows/conversational-estimator-flow';
+import { generateSigil } from '@/ai/flows/sigil-generator-flow';
 
 
 const leadSchema = z.object({
@@ -153,4 +154,25 @@ export async function submitChatMessage(values: z.infer<typeof chatSchema>) {
     console.error('AI chat failed:', error);
     return { success: false, message: 'Could not generate a response at this time.', response: null };
   }
+}
+
+const sigilSchema = z.object({
+    name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+    zodiacSign: z.string(),
+});
+
+export async function getSigil(values: z.infer<typeof sigilSchema>) {
+    const parsed = sigilSchema.safeParse(values);
+    if (!parsed.success) {
+        const error = parsed.error.format()._errors[0];
+        return { success: false, message: error || 'Invalid data', sigil: null };
+    }
+
+    try {
+        const sigil = await generateSigil(parsed.data);
+        return { success: true, message: 'Sigil generated!', sigil };
+    } catch (error) {
+        console.error('AI sigil generation failed:', error);
+        return { success: false, message: 'Could not generate a sigil at this time.', sigil: null };
+    }
 }
