@@ -2,11 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Leaf } from 'lucide-react';
+import { Leaf, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { NavLinks } from './nav-links';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,15 +19,6 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#services', label: 'Services' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '/blog', label: 'Blog' },
-    { href: '#contact', label: 'Contact' },
-  ];
 
   return (
     <header
@@ -40,17 +35,29 @@ const Header = () => {
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="hover:text-primary transition-colors"
-              prefetch={false}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <NavLinks onLinkClick={() => {}} />
         </nav>
+        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <div className="flex flex-col gap-6 p-6">
+               <Link href="/" className="flex items-center gap-2 mb-4" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
+                  <Leaf className="h-6 w-6 text-primary" />
+                  <span className="font-headline text-xl font-bold tracking-tighter">
+                    SYMBI0N
+                  </span>
+                </Link>
+              <nav className="flex flex-col gap-4 text-lg font-medium">
+                 <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
+              </nav>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
