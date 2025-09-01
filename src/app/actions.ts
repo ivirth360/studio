@@ -16,7 +16,7 @@ async function sendEmail({ lead }: { lead: z.infer<typeof leadSchema> }) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
-    secure: true, // Use true for port 465 with SSL/TLS
+    secure: true,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
@@ -62,9 +62,9 @@ async function sendEmail({ lead }: { lead: z.infer<typeof leadSchema> }) {
     await transporter.sendMail(leadNotificationMailOptions);
     await transporter.sendMail(userConfirmationMailOptions);
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send email:', error);
-    return { success: false, error: 'Failed to send email' };
+    return { success: false, error: error.message || 'Failed to send email' };
   }
 }
 
@@ -72,7 +72,8 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
   const parsed = leadSchema.safeParse(values);
 
   if (!parsed.success) {
-    return { success: false, message: 'Invalid data' };
+    const errorMessages = parsed.error.issues.map(issue => issue.message).join(', ');
+    return { success: false, message: `Invalid data: ${errorMessages}` };
   }
 
   const emailResult = await sendEmail({
@@ -82,7 +83,7 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
   if (!emailResult.success) {
      return { 
       success: false, 
-      message: 'Lead submission failed at email stage.',
+      message: emailResult.error || 'Lead submission failed at email stage.',
     };
   }
   
