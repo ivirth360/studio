@@ -20,7 +20,7 @@ import { Avatar, AvatarFallback } from './ui/avatar';
 
 type Message = {
   id: string;
-  role: 'user' | 'model' | 'user-pending';
+  role: 'user' | 'model';
   content: string;
 };
 
@@ -42,7 +42,7 @@ export default function Chatbot() {
     if (isOpen && messages.length === 0) {
       setMessages([initialMessage]);
     }
-  }, [isOpen, messages.length]);
+  }, [isOpen]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -55,18 +55,18 @@ export default function Chatbot() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isPending) return;
 
     const userMessageId = Date.now().toString();
-    const userMessage: Message = { id: userMessageId, role: 'user-pending', content: input };
-    const newMessages: Message[] = [...messages, userMessage];
+    const userMessage: Message = { id: userMessageId, role: 'user', content: input };
+    const currentMessages: Message[] = [...messages, userMessage];
 
-    setMessages(newMessages);
+    setMessages(currentMessages);
     setInput('');
 
     startTransition(async () => {
-      const chatHistory = newMessages.map(({ id, role, content }) => ({
-          role: role === 'user-pending' ? 'user' : role,
+      const chatHistory = currentMessages.map(({ id, role, content }) => ({
+          role,
           content,
       })) as ({role: 'user'|'model', content: string})[];
 
@@ -74,8 +74,7 @@ export default function Chatbot() {
 
       if (result.success && result.response) {
         setMessages([
-          ...messages,
-          { ...userMessage, role: 'user' },
+          ...currentMessages,
           { id: Date.now().toString(), role: 'model', content: result.response },
         ]);
       } else {
@@ -84,7 +83,7 @@ export default function Chatbot() {
           title: 'Uh oh! Something went wrong.',
           description: result.message || 'There was a problem with the chat service.',
         });
-        // Keep the user's message in the chat, but mark it as failed or show an error indicator
+        // Remove the user's message that failed to get a response
         setMessages(m => m.filter(msg => msg.id !== userMessageId));
       }
     });
@@ -116,19 +115,18 @@ export default function Chatbot() {
               <ScrollArea className="h-full" ref={scrollAreaRef}>
                 <div className="p-4 space-y-4">
                 {messages.map((message) => (
-                  <div key={message.id} className={cn("flex items-start gap-3", message.role === 'user' || message.role === 'user-pending' ? 'justify-end' : 'justify-start')}>
+                  <div key={message.id} className={cn("flex items-start gap-3", message.role === 'user' ? 'justify-end' : 'justify-start')}>
                      {message.role === 'model' && (
                         <Avatar className="w-8 h-8 border-2 border-primary/50">
                             <AvatarFallback><Bot className="h-4 w-4" /></AvatarFallback>
                         </Avatar>
                      )}
                      <div className={cn("max-w-[80%] rounded-xl px-4 py-2 text-sm",
-                        message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted',
-                        message.role === 'user-pending' && 'bg-primary/70 text-primary-foreground'
+                        message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'
                         )}>
                         <p className="whitespace-pre-wrap">{message.content}</p>
                      </div>
-                     {(message.role === 'user' || message.role === 'user-pending') && (
+                     {message.role === 'user' && (
                         <Avatar className="w-8 h-8">
                             <AvatarFallback><User className="h-4 w-4" /></AvatarFallback>
                         </Avatar>
@@ -160,7 +158,7 @@ export default function Chatbot() {
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isPending}
                 />
-                <Button type="submit" size="icon" disabled={isPending}>
+                <Button type="submit" size="icon" disabled={isPending || !input.trim()}>
                   <Send className="h-4 w-4" />
                   <span className="sr-only">Send</span>
                 </Button>
