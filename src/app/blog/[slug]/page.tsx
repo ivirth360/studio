@@ -28,7 +28,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     <h3 class="font-headline text-2xl font-bold mt-8 mb-4 text-primary">The Core Principles of Symbiosis</h3>
     <p class="mb-6">Symbiotic design, as we practice it at SYMBI0N, is founded on several key principles. First, it necessitates a deep listening of the ecosystem it intends to integrate with. This is not a passive observation but an active dialogue. We use AI-powered sensors and data analysis to understand the subtle rhythms and flows of an environment—be it an urban landscape or a natural forest. This data-driven empathy allows us to design interventions that enhance, rather than disrupt, existing patterns.</p>
     <figure class="my-8">
-      <img src="https://picsum.photos/seed/${post.slug}2/800/400" alt="In-depth article visual" class="rounded-lg shadow-lg" data-ai-hint="futuristic technology" />
+      <img src="https://picsum.photos/seed/${post.slug}-article/800/400" alt="In-depth article visual" class="rounded-lg shadow-lg" data-ai-hint="futuristic technology" />
       <figcaption class="text-center text-sm text-muted-foreground mt-2">AI-driven analysis reveals hidden patterns in urban ecosystems.</figcaption>
     </figure>
     <p class="mb-6">Second, our approach champions decentralization and modularity. Monolithic, top-down solutions are often brittle and fail to adapt to local conditions. Instead, we focus on creating networks of smaller, interconnected agents that can respond dynamically to change. Think of it as the difference between a single, rigid skyscraper and a sprawling, adaptive mycelial network. Our work on e-bike sharing networks and smart eco-benches are practical applications of this principle, creating a distributed infrastructure that is both efficient and resilient.</p>
@@ -66,7 +66,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
            <div className="mt-12 pt-8 border-t">
               <h3 className="font-headline text-xl font-bold mb-4">About the Author</h3>
               <div className="flex items-center gap-4">
-                <Image src="https://picsum.photos/id/101/200/200" alt="Author" width={80} height={80} className="rounded-full" data-ai-hint="professional portrait"/>
+                <Image src="https://picsum.photos/id/1005/200/200" alt="Author" width={80} height={80} className="rounded-full" data-ai-hint="professional portrait"/>
                 <div>
                   <p className="font-bold text-lg">VedaVyas</p>
                   <p className="text-muted-foreground">Visionary Strategist at SYMBI0N, exploring the threads that connect us to our technological and ecological futures.</p>

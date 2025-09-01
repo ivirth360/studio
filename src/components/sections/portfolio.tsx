@@ -6,29 +6,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const portfolioItems = {
   urban: [
-    { title: 'Smart Eco-Benches', description: 'Solar-powered public seating with integrated environmental sensors.', image: 'https://picsum.photos/seed/urban1/600/400', dataAiHint: 'smart bench city' },
-    { title: 'E-Bike Sharing Network', description: 'A city-wide electric bike sharing program with smart-locking and tracking.', image: 'https://picsum.photos/seed/urban2/600/400', dataAiHint: 'electric bike city' },
-    { title: 'Regenerative Planning', description: 'Urban planning models that prioritize ecological restoration and circular economies.', image: 'https://picsum.photos/seed/urban3/600/400', dataAiHint: 'green city plan' },
+    { title: 'Smart Eco-Benches', description: 'Solar-powered public seating with integrated environmental sensors.', image: 'https://picsum.photos/seed/smart-bench/600/400', dataAiHint: 'smart bench city' },
+    { title: 'E-Bike Sharing Network', description: 'A city-wide electric bike sharing program with smart-locking and tracking.', image: 'https://picsum.photos/seed/ebike-city/600/400', dataAiHint: 'electric bike city' },
+    { title: 'Regenerative Planning', description: 'Urban planning models that prioritize ecological restoration and circular economies.', image: 'https://picsum.photos/seed/green-plan/600/400', dataAiHint: 'green city plan' },
   ],
   ai: [
-    { title: 'PUBLIKA Platform', description: 'An AI-driven knowledge ecosystem for collaborative learning and research.', image: 'https://picsum.photos/seed/ai1/600/400', dataAiHint: 'digital library' },
-    { title: 'SHUKA AI', description: 'A symbolic and systemic AI companion for personal and organizational sense-making.', image: 'https://picsum.photos/seed/ai2/600/400', dataAiHint: 'AI assistant' },
-    { title: 'Eco-Wallet Prototypes', description: 'Prototypes for a unified eco-digital wallet and lifestyle pass.', image: 'https://picsum.photos/seed/ai3/600/400', dataAiHint: 'digital wallet' },
+    { title: 'PUBLIKA Platform', description: 'An AI-driven knowledge ecosystem for collaborative learning and research.', image: 'https://picsum.photos/seed/publika/600/400', dataAiHint: 'digital library' },
+    { title: 'SHUKA AI', description: 'A symbolic and systemic AI companion for personal and organizational sense-making.', image: 'https://picsum.photos/seed/shuka/600/400', dataAiHint: 'AI assistant' },
+    { title: 'Eco-Wallet Prototypes', description: 'Prototypes for a unified eco-digital wallet and lifestyle pass.', image: 'https://picsum.photos/seed/eco-wallet/600/400', dataAiHint: 'digital wallet' },
   ],
   symbolic: [
-    { title: 'VEDASHAKTIKA Universe', description: 'A symbolic-futuristic storytelling universe across multiple media.', image: 'https://picsum.photos/seed/symbolic1/600/400', dataAiHint: 'mythology futuristic' },
-    { title: 'Sigil Maps', description: 'Generative art creating personal and collective symbolic maps.', image: 'https://picsum.photos/seed/symbolic2/600/400', dataAiHint: 'symbolic map' },
-    { title: 'Interactive Codexes', description: 'Web-based interactive codexes for exploring complex knowledge systems.', image: 'https://picsum.photos/seed/symbolic3/600/400', dataAiHint: 'ancient book' },
+    { title: 'VEDASHAKTIKA Universe', description: 'A symbolic-futuristic storytelling universe across multiple media.', image: 'https://picsum.photos/seed/veda/600/400', dataAiHint: 'mythology futuristic' },
+    { title: 'Sigil Maps', description: 'Generative art creating personal and collective symbolic maps.', image: 'https://picsum.photos/seed/sigil-map/600/400', dataAiHint: 'symbolic map' },
+    { title: 'Interactive Codexes', description: 'Web-based interactive codexes for exploring complex knowledge systems.', image: 'https://picsum.photos/seed/codex/600/400', dataAiHint: 'ancient book' },
   ],
   research: [
-    { title: 'Water at 4°C', description: 'A paper exploring the unique properties of water and its implications for life.', image: 'https://picsum.photos/seed/research1/600/400', dataAiHint: 'water molecule' },
-    { title: 'Theory of Everything', description: 'A multidisciplinary approach to a unified model of reality.', image: 'https://picsum.photos/seed/research2/600/400', dataAiHint: 'fractal geometry' },
-    { title: 'GOBERdhan', description: 'Research papers on a sustainable urban framework for India.', image: 'https://picsum.photos/seed/research3/600/400', dataAiHint: 'sustainable city india' },
+    { title: 'Water at 4°C', description: 'A paper exploring the unique properties of water and its implications for life.', image: 'https://picsum.photos/seed/water-research/600/400', dataAiHint: 'water molecule' },
+    { title: 'Theory of Everything', description: 'A multidisciplinary approach to a unified model of reality.', image: 'https://picsum.photos/seed/theory-of-everything/600/400', dataAiHint: 'fractal geometry' },
+    { title: 'GOBERdhan', description: 'Research papers on a sustainable urban framework for India.', image: 'https://picsum.photos/seed/goberdhan-research/600/400', dataAiHint: 'sustainable city india' },
   ],
   creative: [
-    { title: 'Narrative Decks', description: 'Visually rich presentation decks for film, brand, and venture storytelling.', image: 'https://picsum.photos/seed/creative1/600/400', dataAiHint: 'presentation deck' },
-    { title: 'Interactive Apps', description: 'Engaging web and mobile applications for brands and educational purposes.', image: 'https://picsum.photos/seed/creative2/600/400', dataAiHint: 'mobile app' },
-    { title: 'Real Estate Webapps', description: 'Custom web applications for real estate marketing and sales.', image: 'https://picsum.photos/seed/creative3/600/400', dataAiHint: 'luxury real estate' },
+    { title: 'Narrative Decks', description: 'Visually rich presentation decks for film, brand, and venture storytelling.', image: 'https://picsum.photos/seed/narrative-deck/600/400', dataAiHint: 'presentation deck' },
+    { title: 'Interactive Apps', description: 'Engaging web and mobile applications for brands and educational purposes.', image: 'https://picsum.photos/seed/interactive-app/600/400', dataAiHint: 'mobile app' },
+    { title: 'Real Estate Webapps', description: 'Custom web applications for real estate marketing and sales.', image: 'https://picsum.photos/seed/real-estate-app/600/400', dataAiHint: 'luxury real estate' },
   ],
 };
 

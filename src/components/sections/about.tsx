@@ -4,13 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 
 const members = [
-  { name: 'VedaVyas', role: 'Visionary Strategist & Architect of Systems', avatar: 'https://picsum.photos/id/101/200/200', dataAiHint: 'professional portrait' },
-  { name: 'SHUKA AI', role: 'AI Companion & Symbolic Navigator', avatar: 'https://picsum.photos/id/102/200/200', dataAiHint: 'abstract AI' },
-  { name: 'Research Specialist', role: 'Knowledge & Policy Insights', avatar: 'https://picsum.photos/id/103/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Tech Developer', role: 'AI, Web & App Systems', avatar: 'https://picsum.photos/id/104/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Designer', role: 'Visual & UI/UX Architect', avatar: 'https://picsum.photos/id/105/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Creative Writer', role: 'Storytelling & Narrative Strategy', avatar: 'https://picsum.photos/id/106/200/200', dataAiHint: 'professional portrait' },
-  { name: 'Operations Lead', role: 'Partnerships & Business Outreach', avatar: 'https://picsum.photos/id/108/200/200', dataAiHint: 'professional portrait' },
+  { name: 'VedaVyas', role: 'Visionary Strategist & Architect of Systems', avatar: 'https://picsum.photos/id/1005/200/200', dataAiHint: 'professional portrait' },
+  { name: 'SHUKA AI', role: 'AI Companion & Symbolic Navigator', avatar: 'https://picsum.photos/seed/shuka-ai/200/200', dataAiHint: 'abstract AI' },
+  { name: 'Research Specialist', role: 'Knowledge & Policy Insights', avatar: 'https://picsum.photos/id/1011/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Tech Developer', role: 'AI, Web & App Systems', avatar: 'https://picsum.photos/id/1012/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Designer', role: 'Visual & UI/UX Architect', avatar: 'https://picsum.photos/id/1013/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Creative Writer', role: 'Storytelling & Narrative Strategy', avatar: 'https://picsum.photos/id/1014/200/200', dataAiHint: 'professional portrait' },
+  { name: 'Operations Lead', role: 'Partnerships & Business Outreach', avatar: 'https://picsum.photos/id/1015/200/200', dataAiHint: 'professional portrait' },
 ];
 
 export default function About() {
