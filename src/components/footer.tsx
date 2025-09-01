@@ -7,10 +7,12 @@ export default function Footer() {
     <footer className="w-full bg-card border-t">
       <div className="container mx-auto py-8 px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Leaf className="h-5 w-5 text-primary" />
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} SYMBI0N. All rights reserved.
-          </p>
+           <p className="text-sm font-headline text-muted-foreground">
+             SYMBI0N – Humans • AI • Nature
+           </p>
+        </div>
+        <div className="text-sm text-muted-foreground">
+          © 2025 SYMBI0N Collective | Powered by SHUKA AI
         </div>
         <div className="flex items-center gap-4">
             <AiContentTool />
