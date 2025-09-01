@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { NavLinks } from './nav-links';
+import { ThemeToggle } from './theme-toggle';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,32 +35,35 @@ const Header = () => {
             SYMBI0N
           </span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <NavLinks onLinkClick={() => {}} />
-        </nav>
-        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <SheetHeader>
-                <SheetTitle className="font-headline text-2xl">
-                     <Link href="/" className="flex items-center gap-2" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
-                        <Leaf className="h-6 w-6 text-primary" />
-                        <span>SYMBI0N</span>
-                     </Link>
-                </SheetTitle>
-            </SheetHeader>
-            <div className="flex flex-col gap-6 p-6">
-              <nav className="flex flex-col gap-4 text-lg font-medium">
-                 <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
-              </nav>
-            </div>
-          </SheetContent>
-        </Sheet>
+        <div className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <NavLinks onLinkClick={() => {}} />
+            </nav>
+            <ThemeToggle />
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+                <SheetHeader>
+                    <SheetTitle className="font-headline text-2xl">
+                        <Link href="/" className="flex items-center gap-2" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
+                            <Leaf className="h-6 w-6 text-primary" />
+                            <span>SYMBI0N</span>
+                        </Link>
+                    </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-6 p-6">
+                <nav className="flex flex-col gap-4 text-lg font-medium">
+                    <NavLinks onLinkClick={() => setIsMobileMenuOpen(false)} />
+                </nav>
+                </div>
+            </SheetContent>
+            </Sheet>
+        </div>
       </div>
     </header>
   );
