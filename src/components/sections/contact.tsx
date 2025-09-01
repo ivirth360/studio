@@ -18,14 +18,14 @@ export default function Contact() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-muted-foreground" />
-                <a href="mailto:hello@symbi0n.com" className="hover:text-primary">
-                  hello@symbi0n.com
+                <a href="mailto:symbi0n@shuka.in" className="hover:text-primary">
+                  symbi0n@shuka.in
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Globe className="h-5 w-5 text-muted-foreground" />
-                <a href="https://www.symbi0n.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
-                  www.symbi0n.com
+                <a href="https://symbi0n.shuka.in" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                  symbi0n.shuka.in
                 </a>
               </div>
             </div>
