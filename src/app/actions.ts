@@ -3,6 +3,8 @@
 import { z } from 'zod';
 import { processLead } from '@/ai/flows/process-lead-flow';
 import nodemailer from 'nodemailer';
+import { estimateProject } from '@/ai/flows/project-estimator-flow';
+
 
 const leadSchema = z.object({
   name: z.string().min(2),
@@ -108,4 +110,25 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
     message: 'Lead submitted successfully',
     suggestedReply: aiResponse.suggestedReply 
   };
+}
+
+const estimatorSchema = z.object({
+  description: z.string().min(20, { message: "Please provide a more detailed description (at least 20 characters)." }),
+});
+
+export async function getProjectEstimate(values: z.infer<typeof estimatorSchema>) {
+  const parsed = estimatorSchema.safeParse(values);
+
+  if (!parsed.success) {
+    const error = parsed.error.format().description?._errors[0];
+    return { success: false, message: error || 'Invalid data', estimation: null };
+  }
+
+  try {
+    const estimation = await estimateProject(parsed.data);
+    return { success: true, message: 'Estimation complete', estimation };
+  } catch (error) {
+    console.error('AI estimation failed:', error);
+    return { success: false, message: 'Could not generate an estimate at this time.', estimation: null };
+  }
 }

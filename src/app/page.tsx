@@ -6,7 +6,7 @@ import Portfolio from '@/components/sections/portfolio';
 import Blog from '@/components/sections/blog';
 import Frameworks from '@/components/sections/frameworks';
 import Engagement from '@/components/sections/engagement';
-import Pricing from '@/components/sections/pricing';
+import ProjectEstimator from '@/components/sections/project-estimator';
 import Contact from '@/components/sections/contact';
 import Footer from '@/components/footer';
 
@@ -20,7 +20,7 @@ export default function Home() {
         <Services />
         <Portfolio />
         <Frameworks />
-        <Pricing />
+        <ProjectEstimator />
         <Engagement />
         <Blog />
         <Contact />
