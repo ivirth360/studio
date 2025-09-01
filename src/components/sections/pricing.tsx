@@ -7,7 +7,10 @@ import { cn } from '@/lib/utils';
 const pricingPlans = [
   {
     title: 'Freelance Projects',
-    price: 'Starting from $1,000',
+    price: {
+        usd: 'Starting from $1,000',
+        inr: 'Starting from ₹83,000'
+    },
     description: 'One-time or milestone-based engagements for specific project needs.',
     features: ['Fixed Scope & Deliverables', 'Targeted Expertise', 'Ideal for well-defined tasks'],
     cta: 'Get a Quote',
@@ -15,7 +18,10 @@ const pricingPlans = [
   },
   {
     title: 'Monthly Retainers',
-    price: 'Starting from $3,000/mo',
+    price: {
+        usd: 'Starting from $3,000/mo',
+        inr: 'Starting from ₹2,50,000/mo'
+    },
     description: 'Ongoing AI, research, and strategy support to embed our expertise within your team.',
     features: ['Continuous Support', 'Strategic Partnership', 'AI + Research + Strategy'],
     cta: 'Discuss Retainer',
@@ -24,7 +30,10 @@ const pricingPlans = [
   },
   {
     title: 'Collaborative Labs',
-    price: 'Custom Pricing',
+    price: {
+        usd: 'Custom Pricing',
+        inr: 'Custom Pricing'
+    },
     description: 'Co-creation partnerships with startups and institutions to build and launch new ventures.',
     features: ['Joint Development & IP', 'Shared Goals & Risk', 'Accelerated Innovation'],
     cta: 'Propose a Lab',
@@ -47,8 +56,9 @@ export default function Pricing() {
             <Card key={plan.title} className={`flex flex-col border-2 ${plan.featured ? 'border-primary shadow-lg shadow-primary/20' : 'border-border'}`}>
               <CardHeader className="text-center">
                 <CardTitle className="font-headline text-2xl">{plan.title}</CardTitle>
-                <CardDescription className="text-4xl font-bold text-primary py-2">{plan.price}</CardDescription>
-                <p className="text-muted-foreground">{plan.description}</p>
+                <CardDescription className="text-4xl font-bold text-primary py-2">{plan.price.usd}</CardDescription>
+                <CardDescription className="text-2xl font-bold text-muted-foreground">{plan.price.inr}</CardDescription>
+                <p className="text-muted-foreground pt-2">{plan.description}</p>
               </CardHeader>
               <CardContent className="flex-grow">
                 <ul className="space-y-3">
