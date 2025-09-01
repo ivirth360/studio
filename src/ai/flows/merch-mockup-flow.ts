@@ -37,22 +37,11 @@ const generateMerchMockupFlow = ai.defineFlow(
   },
   async ({ sigilImageDataUri, productName }) => {
     
-    // Use a more powerful model for the complex task of image composition.
     const { media } = await ai.generate({
-        model: 'googleai/gemini-2.5-flash',
-        prompt: [
-            {
-                text: `Create a photorealistic product mockup. The product is a ${productName}. The setting should be a clean, minimalist studio environment that feels modern and high-tech. The lighting should be soft but clear, highlighting the product's texture.
-                
-                On this product, please place the following sigil design. The sigil should look like a high-quality print. Ensure the placement is natural and centered. For a T-shirt or hoodie, it should be on the chest. For a bottle, mug, or diary, it should be on the front face.
-                
-                This is the sigil design to place on the product:`
-            },
-            {
-                media: {
-                    url: sigilImageDataUri,
-                }
-            }
+        model: 'googleai/imagen-4.0-fast-generate-001',
+        prompt: `Create a photorealistic product mockup of a ${productName} with a custom sigil printed on it. The product should be in a clean, minimalist studio environment with soft, clear lighting. The sigil design should be placed naturally and centered on the product (e.g., on the chest of a T-shirt, or the front of a bottle). The sigil to be placed is provided in the media.`,
+        media: [
+          { url: sigilImageDataUri }
         ],
         output: {
           format: 'png',

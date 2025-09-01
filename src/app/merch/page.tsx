@@ -96,7 +96,7 @@ export default function MerchPage() {
         }
       });
     }
-  }, [sigilResult, selectedProduct]);
+  }, [sigilResult, selectedProduct, toast]);
 
 
   function onSigilSubmit(values: z.infer<typeof formSchema>) {
