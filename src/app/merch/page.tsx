@@ -1,12 +1,12 @@
 
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
-import { Wand2, Loader2, Sparkles, ShoppingCart, Target } from 'lucide-react';
+import { Wand2, Loader2, Sparkles, ShoppingCart, Target, Shirt, Bot } from 'lucide-react';
 
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -31,9 +31,10 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { getSigil } from '@/app/actions';
+import { getSigil, getMerchMockup } from '@/app/actions';
 import type { GenerateSigilOutput } from '@/ai/flows/sigil-generator-flow';
 import { Textarea } from '@/components/ui/textarea';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const zodiacSigns = [
   "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
@@ -57,10 +58,12 @@ const formSchema = z.object({
 });
 
 export default function MerchPage() {
-  const [isPending, startTransition] = useTransition();
+  const [isGeneratingSigil, startSigilGeneration] = useTransition();
+  const [isGeneratingMockup, startMockupGeneration] = useTransition();
   const { toast } = useToast();
   const [sigilResult, setSigilResult] = useState<GenerateSigilOutput | null>(null);
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [mockupImage, setMockupImage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -69,15 +72,42 @@ export default function MerchPage() {
       intention: '',
     },
   });
+  
+  useEffect(() => {
+    if (sigilResult) {
+      setMockupImage(null);
+      startMockupGeneration(async () => {
+        const result = await getMerchMockup({
+          sigilImageDataUri: sigilResult.sigilImageDataUri,
+          productName: selectedProduct.name,
+        });
+        if (result.success && result.mockup) {
+          setMockupImage(result.mockup.mockupImageDataUri);
+           toast({
+            title: 'Product Mockup Ready!',
+            description: `Preview of your personalized ${selectedProduct.name}.`,
+          });
+        } else {
+           toast({
+            variant: 'destructive',
+            title: 'Mockup Generation Failed',
+            description: result.message || 'Could not create a product preview.',
+          });
+        }
+      });
+    }
+  }, [sigilResult, selectedProduct]);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+
+  function onSigilSubmit(values: z.infer<typeof formSchema>) {
     setSigilResult(null);
-    startTransition(async () => {
+    setMockupImage(null);
+    startSigilGeneration(async () => {
       const result = await getSigil(values);
       if (result.success && result.sigil) {
         toast({
           title: 'Sigil Generated!',
-          description: "Your personal sigil has been crafted.",
+          description: "Your personal sigil has been crafted. Now generating product mockup...",
         });
         setSigilResult(result.sigil);
       } else {
@@ -98,7 +128,7 @@ export default function MerchPage() {
           <div className="container mx-auto px-4 md:px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <h2 className={cn("font-headline text-3xl font-bold tracking-tighter sm:text-4xl", "text-gradient bg-gradient-gold")}>
-                Personalized Symbiotic Merch
+                AI-Personalized Symbiotic Merch
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Create your own unique sigil with SHUKA AI. A symbol of your personal power, printed on our sustainable products.
@@ -112,7 +142,7 @@ export default function MerchPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 font-headline text-2xl">
                       <Wand2 className="text-primary"/>
-                      Craft Your Sigil
+                      1. Craft Your Sigil
                     </CardTitle>
                     <CardDescription>
                       Enter your details and a personal intention. SHUKA AI will generate a symbol unique to your cosmic signature.
@@ -120,7 +150,7 @@ export default function MerchPage() {
                   </CardHeader>
                   <CardContent>
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <form onSubmit={form.handleSubmit(onSigilSubmit)} className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-4">
                           <FormField
                             control={form.control}
@@ -175,8 +205,8 @@ export default function MerchPage() {
                             </FormItem>
                           )}
                         />
-                        <Button type="submit" disabled={isPending} className="w-full">
-                          {isPending ? (
+                        <Button type="submit" disabled={isGeneratingSigil || isGeneratingMockup} className="w-full">
+                          {isGeneratingSigil ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                               Generating Your Symbol...
@@ -211,32 +241,48 @@ export default function MerchPage() {
               <div className="space-y-8">
                 <Card className="sticky top-24">
                   <CardHeader>
-                    <CardTitle className="font-headline text-2xl">Product Preview</CardTitle>
-                    <CardDescription>Select a product to see your personalized sigil on it.</CardDescription>
+                    <CardTitle className="flex items-center gap-2 font-headline text-2xl">
+                        <Shirt className="text-primary"/>
+                        2. Preview Your Merch
+                    </CardTitle>
+                    <CardDescription>Select a product to see a real-time AI-generated mockup of your personalized item.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="relative w-full aspect-square bg-muted rounded-lg flex items-center justify-center overflow-hidden">
-                        <Image src={selectedProduct.image} alt={selectedProduct.name} layout="fill" objectFit="cover" data-ai-hint={selectedProduct.dataAiHint} />
-                        {(isPending || sigilResult) && (
-                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                                {isPending ? (
-                                    <Loader2 className="h-16 w-16 animate-spin text-white" />
-                                ) : sigilResult ? (
-                                    <Image src={sigilResult.sigilImageDataUri} alt={sigilResult.sigilName} width={200} height={200} className="drop-shadow-lg" />
-                                ) : null}
-                            </div>
-                        )}
+                      {isGeneratingMockup || isGeneratingSigil ? (
+                         <div className="flex flex-col items-center gap-4 text-muted-foreground">
+                            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+                            <p className="font-medium">Generating your product...</p>
+                         </div>
+                      ) : mockupImage ? (
+                        <Image src={mockupImage} alt={`Mockup of ${selectedProduct.name} with sigil`} layout="fill" objectFit="cover" />
+                      ) : (
+                        <div className="flex flex-col items-center gap-4 text-center p-4">
+                           <Bot className="h-12 w-12 text-muted-foreground" />
+                           <p className="text-muted-foreground">Your personalized product preview will appear here once you generate a sigil.</p>
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                   <CardFooter className="flex flex-col gap-4">
                      <div className="grid grid-cols-4 gap-2 w-full">
                         {products.map(product => (
-                            <button key={product.name} onClick={() => setSelectedProduct(product)} className={cn("rounded-lg border-2 aspect-square bg-muted p-1 hover:border-primary transition-colors", selectedProduct.name === product.name ? "border-primary" : "border-transparent")}>
+                            <button 
+                                key={product.name} 
+                                onClick={() => setSelectedProduct(product)} 
+                                disabled={!sigilResult || isGeneratingMockup || isGeneratingSigil}
+                                className={cn(
+                                    "rounded-lg border-2 aspect-square bg-muted p-1 hover:border-primary transition-colors",
+                                    "disabled:opacity-50 disabled:cursor-not-allowed",
+                                    selectedProduct.name === product.name ? "border-primary" : "border-transparent"
+                                )}
+                            >
                                 <Image src={product.image} alt={product.name} width={100} height={100} className="object-cover rounded-md w-full h-full" data-ai-hint={product.dataAiHint} />
+                                <span className="sr-only">{product.name}</span>
                             </button>
                         ))}
                      </div>
-                     <Button className="w-full" size="lg" disabled={!sigilResult}>
+                     <Button className="w-full" size="lg" disabled={!mockupImage}>
                         <ShoppingCart className="mr-2 h-5 w-5" />
                         Add to Cart (Coming Soon)
                      </Button>

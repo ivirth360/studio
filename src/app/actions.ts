@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import { estimateProject } from '@/ai/flows/project-estimator-flow';
 import { conversationalEstimate } from '@/ai/flows/conversational-estimator-flow';
 import { generateSigil } from '@/ai/flows/sigil-generator-flow';
+import { generateMerchMockup } from '@/ai/flows/merch-mockup-flow';
 
 
 const leadSchema = z.object({
@@ -175,5 +176,26 @@ export async function getSigil(values: z.infer<typeof sigilSchema>) {
     } catch (error) {
         console.error('AI sigil generation failed:', error);
         return { success: false, message: 'Could not generate a sigil at this time.', sigil: null };
+    }
+}
+
+const merchMockupSchema = z.object({
+    sigilImageDataUri: z.string(),
+    productName: z.string(),
+});
+
+export async function getMerchMockup(values: z.infer<typeof merchMockupSchema>) {
+    const parsed = merchMockupSchema.safeParse(values);
+    if (!parsed.success) {
+        const error = parsed.error.format()._errors[0];
+        return { success: false, message: error || 'Invalid data', mockup: null };
+    }
+
+    try {
+        const mockup = await generateMerchMockup(parsed.data);
+        return { success: true, message: 'Mockup generated!', mockup };
+    } catch (error) {
+        console.error('AI mockup generation failed:', error);
+        return { success: false, message: 'Could not generate a mockup at this time.', mockup: null };
     }
 }
