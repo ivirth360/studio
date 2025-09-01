@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI-powered tool to generate product mockups with personalized sigils.
@@ -39,10 +40,10 @@ const generateMerchMockupFlow = ai.defineFlow(
     
     const { media } = await ai.generate({
         model: 'googleai/imagen-4.0-fast-generate-001',
-        prompt: `Create a photorealistic product mockup of a ${productName} with a custom sigil printed on it. The product should be in a clean, minimalist studio environment with soft, clear lighting. The sigil design should be placed naturally and centered on the product (e.g., on the chest of a T-shirt, or the front of a bottle). The sigil to be placed is provided in the media.`,
-        media: {
-          url: sigilImageDataUri
-        },
+        prompt: [
+          {text: `Create a photorealistic product mockup of a ${productName} with a custom sigil printed on it. The product should be in a clean, minimalist studio environment with soft, clear lighting. The sigil design should be placed naturally and centered on the product (e.g., on the chest of a T-shirt, or the front of a bottle). The sigil to be placed is provided in the media.`},
+          {media: { url: sigilImageDataUri } }
+        ],
         output: {
           format: 'png',
         }

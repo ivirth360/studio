@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI-powered tool to generate personalized sigils.
@@ -77,7 +78,7 @@ Generate the name and description based on the schema.
         prompt: imagePrompt,
         output: {
           format: 'png',
-        }
+        },
       }),
       ai.generate({
         model: 'googleai/gemini-2.5-flash',
