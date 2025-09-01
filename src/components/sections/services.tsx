@@ -1,60 +1,65 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, BrainCircuit, Building, Lightbulb, Code, BookText, Check } from 'lucide-react';
 
 const serviceCategories = [
   {
     title: 'AI & Digital Systems',
-    icon: <BrainCircuit className="h-8 w-8 text-primary" />,
+    icon: <BrainCircuit className="h-10 w-10 text-primary" />,
     items: [
-      'AI Assistants (custom GPTs, trained on your domain)',
-      'AI Flow Architecture (automations, triggers, workflows)',
-      'Conversational AI (for education, real estate, health, governance)',
-      'Symbolic AI (codexes, glyphs, seals)',
-      'IoT + AI integration (eco devices, wearables, apps)',
+      'AI Assistants & Workflows',
+      'Conversational AI Agents',
+      'Symbolic AI & Codexes',
+      'IoT & AI Integration',
     ],
   },
   {
-    title: 'Urbanism & Planning Futures',
-    icon: <Building className="h-8 w-8 text-primary" />,
+    title: 'Urbanism & Planning',
+    icon: <Building className="h-10 w-10 text-primary" />,
     items: [
-      'Urban & Regional Planning',
-      'Smart City Ecosystems (IoT, AI, e-mobility, eco-benches)',
-      'Biomimetic & Symbolic Urban Design',
-      'Research & Policy Frameworks',
-      'Sustainable Land-use & Habitat Planning',
+      'Smart & Symbiotic City Design',
+      'Biomimetic Architecture',
+      'Regenerative Policy Frameworks',
+      'Sustainable Land-use Planning',
     ],
   },
   {
-    title: 'Creative Strategy & Storytelling',
-    icon: <Lightbulb className="h-8 w-8 text-primary" />,
+    title: 'Creative Strategy',
+    icon: <Lightbulb className="h-10 w-10 text-primary" />,
     items: [
-      'Narrative Architecture (mythic + systemic storytelling)',
-      'Brand Identity (glyphs, seals, symbolic design language)',
+      'Narrative Architecture',
+      'Systemic Brand Identity',
       'Vision Decks & Portfolios',
-      'Interactive Codexes (web/VR/AR apps)',
-      'Script & Film Development',
+      'Interactive Storytelling',
     ],
   },
   {
     title: 'Design & Development',
-    icon: <Code className="h-8 w-8 text-primary" />,
+    icon: <Code className="h-10 w-10 text-primary" />,
     items: [
-      'Web & App Development (full-stack)',
-      'AI-powered Webapps',
-      'UI/UX with symbolic language',
-      'Landing Pages & Funnels',
-      'Motion Graphics & Sonic/Lumia visuals',
+      'Full-Stack Web & App Dev',
+      'AI-powered Web Applications',
+      'Symbolic UI/UX Design',
+      'Motion Graphics & Visuals',
     ],
   },
   {
     title: 'Research & Consulting',
-    icon: <BookText className="h-8 w-8 text-primary" />,
+    icon: <BookText className="h-10 w-10 text-primary" />,
     items: [
-      'Research Papers & Journal Submissions',
-      'Knowledge Platforms (digital campuses, ecosystems)',
-      'Sustainability & Climate Consulting',
-      'Innovation Strategy for Startups & Institutions',
-      'Academic & Grant Writing',
+      'Academic Research & Papers',
+      'Digital Knowledge Ecosystems',
+      'Climate & Innovation Strategy',
+      'Grant & Academic Writing',
+    ],
+  },
+  {
+    title: 'Symbiotic Intelligence',
+    icon: <Leaf className="h-10 w-10 text-primary" />,
+    items: [
+      'Life-Centered Design Sprints',
+      'Ecological Data Analysis',
+      'Human-AI-Nature Interfaces',
+      'Regenerative Systems Mapping',
     ],
   },
 ];
@@ -69,29 +74,27 @@ export default function Services() {
             We provide end-to-end support for projects aiming to create deep, systemic impact at the nexus of technology and ecology.
           </p>
         </div>
-        <div className="mx-auto max-w-4xl mt-12">
-          <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
-            {serviceCategories.map((category, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-b">
-                <AccordionTrigger className="text-xl font-headline hover:no-underline">
-                  <div className="flex items-center gap-4">
-                    {category.icon}
-                    {category.title}
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="pt-4 pl-12">
-                  <ul className="space-y-3">
-                    {category.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <div className="mx-auto grid max-w-7xl items-stretch gap-8 sm:grid-cols-2 lg:max-w-none lg:grid-cols-3 mt-12">
+          {serviceCategories.map((category) => (
+            <Card key={category.title} className="flex flex-col bg-card hover:bg-muted/50 transition-colors duration-300">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  {category.icon}
+                  <CardTitle className="font-headline text-2xl">{category.title}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <ul className="space-y-3">
+                  {category.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className="flex items-start gap-3">
+                      <Check className="h-5 w-5 mt-1 text-accent flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
