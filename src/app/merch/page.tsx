@@ -120,6 +120,15 @@ export default function MerchPage() {
     });
   }
 
+  function handleAddToCart() {
+    if (!mockupImage) return;
+    // In a real app, this would add the item to a cart state/context
+    toast({
+        title: "Added to Cart!",
+        description: `Your personalized ${selectedProduct.name} is in your cart.`,
+    })
+  }
+
   return (
     <div className="flex flex-col min-h-dvh bg-background text-foreground">
       <Header />
@@ -282,9 +291,9 @@ export default function MerchPage() {
                             </button>
                         ))}
                      </div>
-                     <Button className="w-full" size="lg" disabled={!mockupImage}>
+                     <Button className="w-full" size="lg" disabled={!mockupImage || isGeneratingMockup || isGeneratingSigil} onClick={handleAddToCart}>
                         <ShoppingCart className="mr-2 h-5 w-5" />
-                        Add to Cart (Coming Soon)
+                        Add to Cart
                      </Button>
                   </CardFooter>
                 </Card>
