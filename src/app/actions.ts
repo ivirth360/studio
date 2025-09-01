@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { processLead } from '@/ai/flows/process-lead-flow';
 import nodemailer from 'nodemailer';
 import { estimateProject } from '@/ai/flows/project-estimator-flow';
+import { conversationalEstimate } from '@/ai/flows/conversational-estimator-flow';
 
 
 const leadSchema = z.object({
@@ -130,5 +131,26 @@ export async function getProjectEstimate(values: z.infer<typeof estimatorSchema>
   } catch (error) {
     console.error('AI estimation failed:', error);
     return { success: false, message: 'Could not generate an estimate at this time.', estimation: null };
+  }
+}
+
+const chatSchema = z.object({
+  messages: z.array(z.object({
+    role: z.enum(['user', 'model']),
+    content: z.string(),
+  })),
+});
+
+export async function submitChatMessage(values: z.infer<typeof chatSchema>) {
+  const parsed = chatSchema.safeParse(values);
+  if (!parsed.success) {
+    return { success: false, message: 'Invalid data', response: null };
+  }
+  try {
+    const response = await conversationalEstimate(parsed.data);
+    return { success: true, message: 'Response generated', response };
+  } catch (error) {
+    console.error('AI chat failed:', error);
+    return { success: false, message: 'Could not generate a response at this time.', response: null };
   }
 }

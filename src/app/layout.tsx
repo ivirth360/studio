@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/theme-provider';
+import Chatbot from '@/components/chatbot';
 
 export const metadata: Metadata = {
   title: 'SYMBI0N | AI, Regenerative Design & Urban Futures Collective',
@@ -28,6 +29,7 @@ export default function RootLayout({
             disableTransitionOnChange
         >
             {children}
+            <Chatbot />
             <Toaster />
         </ThemeProvider>
       </body>
