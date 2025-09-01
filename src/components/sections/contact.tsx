@@ -13,7 +13,7 @@ export default function Contact() {
               Let’s Co-Create the Future.
             </h2>
             <p className="text-muted-foreground md:text-lg">
-              Have a project in mind? An idea to explore? Or just want to connect with the collective? We'd love to hear from you.
+              Have a project in mind? An idea to explore? Or just want to connect with the collective? We'd love to hear from you. Fill out the form, and our AI assistant will help draft a starting point for our conversation.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -36,7 +36,6 @@ export default function Contact() {
             </div>
           </div>
           <div className="space-y-6">
-            <h3 className="font-headline text-2xl font-bold">Work With Us</h3>
             <LeadCaptureForm />
           </div>
         </div>

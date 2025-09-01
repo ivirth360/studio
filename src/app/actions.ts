@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from 'zod';
+import { processLead } from '@/ai/flows/process-lead-flow';
 
 const leadSchema = z.object({
   name: z.string().min(2),
@@ -13,18 +14,31 @@ export async function submitLead(values: z.infer<typeof leadSchema>) {
   const parsed = leadSchema.safeParse(values);
 
   if (!parsed.success) {
-    return { success: false, message: 'Invalid data' };
+    return { success: false, message: 'Invalid data', suggestedReply: null };
   }
 
-  // In a real application, you would send this data to your CRM,
-  // database, or email service.
-  // Example: await sendEmail({ to: 'symbi0n@shuka.in', ... })
+  // In a real application, you would save this to a database.
   console.log('New Lead Received:');
   console.log(parsed.data);
 
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  // For this demo, we'll always return success.
-  return { success: true, message: 'Lead submitted successfully' };
+  // AI-powered lead processing
+  try {
+    const aiResponse = await processLead(parsed.data);
+    
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    return { 
+      success: true, 
+      message: 'Lead submitted successfully',
+      suggestedReply: aiResponse.suggestedReply 
+    };
+  } catch (error) {
+    console.error('AI processing failed:', error);
+    return { 
+      success: true, // We still captured the lead
+      message: 'Lead submitted, but AI processing failed.',
+      suggestedReply: 'Could not generate a suggestion at this time.'
+    };
+  }
 }
